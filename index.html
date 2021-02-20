@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c20485228a.js"></script>
+</head>
+<body>  
+
+    <div id="div1">
+    </div>
+
+
+    <script>
+
+        var box = document.getElementById("div1");
+
+        box.style.width = "400px";
+        box.style.height = "400px";
+        box.style.position = "absolute";
+        box.style.top = "0";
+        box.style.left = "0";
+        box.style.backgroundImage = "url(a.jpg)"
+        box.style.backgroundPosition = "center";
+        box.style.backgroundSize = "cover";
+        box.style.objectFit = "cover";
+        
+        var yukariDon = false;
+        var solaDon = false;
+
+        function animasyon(box,top,left){
+            var ustKonum = Number(box.style.top.split("px")[0]);
+            var solKonum = Number(box.style.left.split("px")[0]);
+            
+            if(ustKonum >= (window.innerHeight - Number(box.style.height.split("px")[0]))){
+                yukariDon = true;
+            }
+            else if(ustKonum<=0){
+                yukariDon = false;
+            }
+            box.style.top = (ustKonum+top).toString() + "px";
+           
+            if(solKonum >= (window.innerWidth - Number(box.style.height.split("px")[0]))){
+                solaDon = true;
+            }
+            else if(solKonum<=0){
+                solaDon = false;
+            }
+            box.style.left = (solKonum+left).toString() + "px";
+        }
+ 
+        setInterval(function(){
+
+            if(yukariDon == true && solaDon==true){
+                animasyon(box,-1,-1);
+            }
+            else if(yukariDon==false && solaDon ==true){
+                animasyon(box,1,-1);
+            }
+            else if(yukariDon==true && solaDon ==false){
+                animasyon(box,-1,1);
+            }   
+            else if(yukariDon==false && solaDon==false){
+                animasyon(box,1,1)
+            }
+
+        },6)
+        
+
+    </script>
+
+</body>
+</html>
